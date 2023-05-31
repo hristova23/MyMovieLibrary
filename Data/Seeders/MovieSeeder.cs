@@ -57,6 +57,13 @@ namespace MyMovieLibrary.Data.Seeders
                    GenreId = Guid.Parse("3104db1a-525c-4f63-aedf-242184ee6637"),
                    PremiereDate = new DateTime(2017,06,02,0,0,0)
                },
+               new Movie()
+               {
+                   Id = Guid.Parse("9ed08e60-a2c6-425a-bf5d-0a1bd92ee83b"),
+                   Title = "The Matrix",
+                   GenreId = Guid.Parse("d09e5f41-9592-4c4c-a9ac-1a75d413b7ed"),
+                   PremiereDate = new DateTime(1999,09,03,0,0,0)
+               },
             };
 
             return movies;

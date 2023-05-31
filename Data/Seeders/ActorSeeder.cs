@@ -44,7 +44,12 @@ namespace MyMovieLibrary.Data.Seeders
                {
                    Id = Guid.Parse("ee4498a8-2251-402e-8ce0-070807f960c9"),
                    Name = "Sarah Shahi"
-               }
+               },
+               new Actor()
+               {
+                   Id = Guid.Parse("873dac8f-627c-44f3-a1d3-982817ca65c6"),
+                   Name = "Keanu Reeves"
+               },
             };
 
             return actors;

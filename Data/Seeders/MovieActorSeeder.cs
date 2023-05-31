@@ -65,6 +65,11 @@ namespace MyMovieLibrary.Data.Seeders
                    MovieId = Guid.Parse("1a4d6444-4739-4058-a905-ba58f9c43779"),
                    ActorId = Guid.Parse("ee4498a8-2251-402e-8ce0-070807f960c9")
                },
+               new MovieActor()
+               {
+                   MovieId = Guid.Parse("9ed08e60-a2c6-425a-bf5d-0a1bd92ee83b"),
+                   ActorId = Guid.Parse("873dac8f-627c-44f3-a1d3-982817ca65c6")
+               },
             };
 
             return movieActorList;
