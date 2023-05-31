@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyMovieLibrary.Data.Models
 {
@@ -12,11 +13,14 @@ namespace MyMovieLibrary.Data.Models
         public string Title { get; set; } = null!;
 
         [Required]
-        public Genre Genre { get; set; } = null!;
+        public int GenreId { get; set; }
+
+        [ForeignKey(nameof(GenreId))]
+        public Genre Genre { get; set; } = null!; // <-- mapping property
 
         [Required]
         public DateTime PremiereDate { get; set; }
 
-        public ICollection<Actor> Actors { get; set; } = new HashSet<Actor>();
+        public ICollection<MovieActor> Actors { get; set; } = new HashSet<MovieActor>();
     }
 }

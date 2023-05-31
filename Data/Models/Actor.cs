@@ -10,5 +10,7 @@ namespace MyMovieLibrary.Data.Models
         [Required]
         [StringLength(50)]
         public string Name { get; set; } = null!;
+
+        public ICollection<MovieActor> Movies { get; set; } = new HashSet<MovieActor>();
     }
 }
