@@ -5,7 +5,7 @@ namespace MyMovieLibrary.Data.Models
     public class Actor
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set;} = Guid.NewGuid();
 
         [Required]
         [StringLength(50)]

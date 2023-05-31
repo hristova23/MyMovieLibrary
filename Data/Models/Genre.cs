@@ -4,13 +4,8 @@ namespace MyMovieLibrary.Data.Models
 {
     public class Genre
     {
-        public Genre()
-        {
-            this.Movies = new HashSet<Movie>();
-        }
-
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set;} = Guid.NewGuid();
 
         [Required]
         [StringLength(20)]

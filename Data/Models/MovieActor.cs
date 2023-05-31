@@ -6,13 +6,13 @@ namespace MyMovieLibrary.Data.Models
     public class MovieActor
     {
         [Required]
-        public int MovieId { get; set; }
+        public Guid MovieId { get; }
 
         [ForeignKey(nameof(MovieId))]
         public Movie Movie { get; set; } = null!;
 
         [Required]
-        public string ActorId { get; set; } = null!;
+        public Guid ActorId { get; }
 
         [ForeignKey(nameof(ActorId))]
         public Actor Actor { get; set; } = null!;

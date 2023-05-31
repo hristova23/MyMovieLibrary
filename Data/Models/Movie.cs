@@ -6,14 +6,14 @@ namespace MyMovieLibrary.Data.Models
     public class Movie
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [StringLength(50)]
         public string Title { get; set; } = null!;
 
         [Required]
-        public int GenreId { get; set; }
+        public Guid GenreId { get; set; }
 
         [ForeignKey(nameof(GenreId))]
         public Genre Genre { get; set; } = null!; // <-- mapping property

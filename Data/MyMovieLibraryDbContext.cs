@@ -47,5 +47,7 @@ namespace MyMovieLibrary.Data
         public DbSet<Genre> Genres { get; set; } = null!;
 
         public DbSet<Actor> Actors { get; set; } = null!;
+
+        public DbSet<Actor> MovieActor { get; set; } = null!;
     }
 }
