@@ -1,5 +1,6 @@
 ﻿using MyMovieLibrary.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using MyMovieLibrary.Data.Seeders;
 
 namespace MyMovieLibrary.Data
 {
@@ -12,6 +13,11 @@ namespace MyMovieLibrary.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new GenreSeeder());
+            builder.ApplyConfiguration(new ActorSeeder());
+            builder.ApplyConfiguration(new MovieSeeder());
+            builder.ApplyConfiguration(new MovieActorSeeder());
+
             builder.Entity<Movie>(movie =>
             {
                 movie
