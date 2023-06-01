@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MyMovieLibrary.Data;
 using MyMovieLibrary.Data.Common;
 using MyMovieLibrary.Services;
+using MyMovieLibrary.Services.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 

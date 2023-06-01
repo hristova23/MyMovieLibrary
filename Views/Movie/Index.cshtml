@@ -3,5 +3,37 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">All Movies</h1>
+    <h1 class="display-4 p-3">@ViewBag.Title</h1>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" style="width: 20%">Title</th>
+                <th scope="col" style="width: 20%">Genre</th>
+                <th scope="col" style="width: 20%">Premiere Date</th>
+                <th scope="col" style="width: 40%"> Main Actors</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model)
+            {
+                <tr>
+                    <td>@movie.Title</td>
+                    <td>@movie.Genre</td>
+                    <td>@movie.PremiereDate.ToString("dddd, %d MMM yyyy")</td>
+                    <td>
+                    @if(movie.Actors.Count > 0)
+                    {
+                        @foreach (var actor in movie.Actors)
+                        {
+                            <span> • @actor.Name</span>
+                        }
+                    }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="container text-end">
+        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Add", "Movie")'"><i class="bi bi-plus-circle"></i>Add Movie</button>
+    </div>
 </div>
