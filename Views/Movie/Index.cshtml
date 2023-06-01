@@ -4,6 +4,15 @@
 
 <div class="text-center">
     <h1 class="display-4 p-3">@ViewBag.Title</h1>
+
+    @using (Html.BeginForm("Index", "Movie", FormMethod.Get))
+    {
+    <p>
+        Search by actor: @Html.TextBox("SearchString")  
+        <input type="submit" value="Search" />  
+    </p>
+    }   
+
     <table class="table">
         <thead class="table-dark">
             <tr>

@@ -16,35 +16,41 @@ namespace MyMovieLibrary.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             var movies = await movieService.GetAllAsync();
 
             //Sorting:
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
-            ViewBag.GenreSortParm = String.IsNullOrEmpty(sortOrder) ? "genre_desc" : "genre";
+            ViewBag.GenreSortParm = sortOrder == "genre" ? "genre_desc" : "genre";
             ViewBag.DateSortParm = sortOrder == "date" ? "date_desc" : "date";
-            var sortedMovies = from m in movies
-                               select m;
+            var sortedMovies = from m in movies select m;
+
+            //Filtering by actor name:
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                sortedMovies = movies.Where(m => m.Actors.Any(a => a.Name.Contains(searchString))).ToList();
+            }
+
             switch (sortOrder)
             {
                 case "title_desc":
-                    sortedMovies = movies.OrderByDescending(s => s.Title);
+                    sortedMovies = sortedMovies.OrderByDescending(s => s.Title);
                     break;
                 case "genre":
-                    sortedMovies = movies.OrderBy(s => s.Genre);
+                    sortedMovies = sortedMovies.OrderBy(s => s.Genre);
                     break;
                 case "genre_desc":
-                    sortedMovies = movies.OrderByDescending(s => s.Genre);
+                    sortedMovies = sortedMovies.OrderByDescending(s => s.Genre);
                     break;
                 case "date":
-                    sortedMovies = movies.OrderBy(s => s.PremiereDate);
+                    sortedMovies = sortedMovies.OrderBy(s => s.PremiereDate);
                     break;
                 case "date_desc":
-                    sortedMovies = movies.OrderByDescending(s => s.PremiereDate);
+                    sortedMovies = sortedMovies.OrderByDescending(s => s.PremiereDate);
                     break;
                 default:
-                    sortedMovies = movies.OrderBy(s => s.Title);
+                    sortedMovies = sortedMovies.OrderBy(s => s.Title);
                     break;
             }
 
