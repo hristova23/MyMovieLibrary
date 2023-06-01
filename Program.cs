@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyMovieLibrary.Data;
+using MyMovieLibrary.Data.Common;
+using MyMovieLibrary.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,9 @@ builder.Services.AddDbContext<MyMovieLibraryDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 var app = builder.Build();
 
