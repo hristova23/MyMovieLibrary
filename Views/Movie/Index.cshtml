@@ -7,9 +7,15 @@
     <table class="table">
         <thead class="table-dark">
             <tr>
-                <th scope="col" style="width: 20%">Title</th>
-                <th scope="col" style="width: 20%">Genre</th>
-                <th scope="col" style="width: 20%">Premiere Date</th>
+                <th scope="col" style="width: 20%">
+                    @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th scope="col" style="width: 20%">
+                    @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParm })
+                </th>
+                <th scope="col" style="width: 20%">
+                    @Html.ActionLink("Premiere Date", "Index", new { sortOrder = ViewBag.DateSortParm })
+                </th>
                 <th scope="col" style="width: 40%"> Main Actors</th>
             </tr>
         </thead>

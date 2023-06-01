@@ -16,11 +16,39 @@ namespace MyMovieLibrary.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var model = await movieService.GetAllAsync();
+            var movies = await movieService.GetAllAsync();
 
-            return View(model);
+            //Sorting:
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewBag.GenreSortParm = String.IsNullOrEmpty(sortOrder) ? "genre_desc" : "genre";
+            ViewBag.DateSortParm = sortOrder == "date" ? "date_desc" : "date";
+            var sortedMovies = from m in movies
+                               select m;
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    sortedMovies = movies.OrderByDescending(s => s.Title);
+                    break;
+                case "genre":
+                    sortedMovies = movies.OrderBy(s => s.Genre);
+                    break;
+                case "genre_desc":
+                    sortedMovies = movies.OrderByDescending(s => s.Genre);
+                    break;
+                case "date":
+                    sortedMovies = movies.OrderBy(s => s.PremiereDate);
+                    break;
+                case "date_desc":
+                    sortedMovies = movies.OrderByDescending(s => s.PremiereDate);
+                    break;
+                default:
+                    sortedMovies = movies.OrderBy(s => s.Title);
+                    break;
+            }
+
+            return View(sortedMovies);
         }
 
         [HttpGet]
