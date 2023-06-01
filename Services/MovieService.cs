@@ -9,10 +9,12 @@ namespace MyMovieLibrary.Services
     public class MovieService : IMovieService
     {
         private readonly IRepository repo;
+        private readonly IActorService actorService;
 
-        public MovieService(IRepository _repo)
+        public MovieService(IRepository _repo, IActorService _actorService)
         {
             repo = _repo;
+            actorService = _actorService;
         }
 
         public async Task<IEnumerable<MovieVM>> GetAllAsync()
@@ -32,6 +34,31 @@ namespace MyMovieLibrary.Services
                     }).ToList(),
                 })
                 .ToListAsync();
+        }
+
+        public async Task AddMovieAsync(AddMovieVM model)
+        {
+            //Adding actors to db
+            foreach (var actor in model.Actors)
+            {
+                await actorService.AddActorAsync(actor.Id, actor.Name);
+            }
+
+            //Adding movie to db
+            var movie = new Movie()
+            {
+                Title = model.Title,
+                GenreId = Guid.Parse(model.GenreId),
+                PremiereDate = model.PremiereDate,
+                Actors = model.Actors.Select(a => new MovieActor()
+                {
+                    ActorId = Guid.Parse(a.Id),
+                    MovieId = Guid.NewGuid()
+                }).ToList()
+            };
+
+            await repo.AddAsync(movie);
+            await repo.SaveChangesAsync();
         }
     }
 }

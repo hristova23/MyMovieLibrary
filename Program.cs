@@ -16,6 +16,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IActorService, ActorService>();
 
 var app = builder.Build();
 
